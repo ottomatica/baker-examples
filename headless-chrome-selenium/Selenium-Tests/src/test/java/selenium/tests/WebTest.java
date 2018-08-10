@@ -39,12 +39,6 @@ public class WebTest {
         driver.quit();
     }
 
-    @Test
-    public void googleExists () throws Exception {
-        driver.get( "http://www.google.com" );
-        assertEquals( "Google", driver.getTitle() );
-    }
-
     private static void WaitForAngularToLoad () {
         new NgWebDriver( (ChromeDriver) driver ).waitForAngularRequestsToFinish();
     }

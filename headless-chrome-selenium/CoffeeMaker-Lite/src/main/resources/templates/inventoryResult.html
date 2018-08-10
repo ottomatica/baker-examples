@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Inventory Updated</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+	<p th:text="'Coffee: ' + ${inventoryForm.coffee}" />
+	<p th:text="'Milk ' + ${inventoryForm.milk}" />
+	<p th:text="'Sugar: ' + ${inventoryForm.sugar}" />
+	<p th:text="'Chocolate: ' + ${inventoryForm.chocolate}" />
+	<a href="/inventory">Update inventory</a>
+	<a href="/index">Home</a>
+</body>
+</html>
