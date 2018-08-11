@@ -82,9 +82,11 @@ public class WebTest {
 
         final WebElement button = driver.findElement( By.xpath( "//input[@value='Submit']" ) );
         button.click();
+        // Give a chance for backend to process.
+        Thread.sleep(1000);
 
         // Get page again.
-        driver.get( ROOT + "inventory.html" );
+        driver.navigate().refresh();        
         WaitForAngularToLoad();
 
         final String currentCoffee = driver.findElement( By.xpath( "//span[@id='currentCoffee']" ) ).getText();
