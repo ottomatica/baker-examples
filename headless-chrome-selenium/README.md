@@ -30,7 +30,7 @@ commands:
 
 A simple "CoffeeMaker" application serves up coffee ingredients and receipes via a REST endpoint (e.g. /api/v1/inventory). Visiting the site at http://192.168.9.11:8080, will allow you to interact with the web app. In this version of CoffeeMaker, the DB and other functionality has been removed in order to keep this application simple. See [CoffeeMaker-Lite](CoffeeMaker-Lite/).
 
-A set of selenium tests will use the ChromeDriver to verify the _limited_ functionality of the web app.
+A set of selenium tests will use the ChromeDriver to verify the _limited_ functionality of the web app. See [Selenium-Tests](Selenium-Tests/).
 
 ### Try it out
 
