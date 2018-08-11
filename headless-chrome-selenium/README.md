@@ -8,6 +8,24 @@ Selenium is a powerful tool for scripting web browsers, such as Chrome. Selenium
 
 The [baker environment](baker.yml/) sets up Java 8, maven, and Google Chrome automatically.
 
+```
+name: headless-selenium
+vm:
+  ip: 192.168.9.11
+lang:
+  - java8
+tools:
+  - maven
+packages:
+  - apt:
+    - google-chrome-stable:
+        deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+commands:
+  unit-test: cd CoffeeMaker-Lite/; mvn test
+  web-test: cd Selenium-Tests/; mvn test
+  serve: cd CoffeeMaker-Lite/; mvn spring-boot:run
+```
+
 ### Project
 
 A simple "CoffeeMaker" application serves up coffee ingredients and receipes via a REST endpoint (e.g. /api/v1/inventory). Visiting the site at http://192.168.9.11:8080, will allow you to interact with the web app. In this version of CoffeeMaker, the DB and other functionality has been removed in order to keep this application simple. See [CoffeeMaker-Lite](CoffeeMaker-Lite/).
