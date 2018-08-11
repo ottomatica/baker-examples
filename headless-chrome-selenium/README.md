@@ -6,7 +6,7 @@ Selenium is a powerful tool for scripting web browsers, such as Chrome. Selenium
 
 ### Baker environment
 
-The baker environment sets up Java 8, maven, and Google Chrome automatically.
+The [baker environment](baker.yml/) sets up Java 8, maven, and Google Chrome automatically.
 
 ### Project
 
@@ -22,7 +22,7 @@ Create the vm.
 baker bake
 ```
 
-Start up the web app.
+Start up the web app. Then visit: http://192.168.9.11:8080
 
 ``` bash
 baker run serve
