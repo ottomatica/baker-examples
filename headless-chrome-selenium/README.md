@@ -1,6 +1,6 @@
 # headless-selenium
 
-In this project, we demonstrate using [Selenium](http://www.seleniumhq.org/) running on Google Chrome in **headless mode** to run tests against a simple Java spring-boot web site.
+In this project, we demonstrate using [Selenium](http://www.seleniumhq.org/) running on Google Chrome in **headless mode** to run tests against a simple Java spring-boot web app.
 
 Selenium is a powerful tool for scripting web browsers, such as Chrome. Selenium can be useful for supporting automatic *integration and acceptance testing* of a web applications. Additionally, Selenium can be integrated with continuous integration systems, such as Jenkins, to verify software changes in an automated build system.
 
