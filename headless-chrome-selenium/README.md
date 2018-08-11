@@ -35,3 +35,17 @@ baker run web-test
 ```
 
 You should see the following results.
+
+```
+Results :
+
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.512 s
+[INFO] Finished at: 2018-08-11T00:32:30+00:00
+[INFO] Final Memory: 13M/32M
+[INFO] ------------------------------------------------------------------------
+```
