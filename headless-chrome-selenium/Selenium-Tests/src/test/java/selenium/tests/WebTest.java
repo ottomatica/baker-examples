@@ -28,6 +28,9 @@ public class WebTest {
         ChromeDriverManager.getInstance().setup();
         final ChromeOptions options = new ChromeOptions();
         options.addArguments( "headless" );
+        //options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        // Needed if running in chroot
+        options.addArguments("--no-sandbox"); // Bypass OS security model        
         options.addArguments( "window-size=1200x600" );
         options.addArguments( "blink-settings=imagesEnabled=false" );
         driver = new ChromeDriver( options );
