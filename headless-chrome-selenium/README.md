@@ -8,7 +8,7 @@ Selenium is a powerful tool for scripting web browsers, such as Chrome. Selenium
 
 The [baker environment](baker.yml/) sets up Java 8, maven, and Google Chrome automatically.
 
-```
+``` yaml
 name: headless-selenium
 vm:
   ip: 192.168.9.11
