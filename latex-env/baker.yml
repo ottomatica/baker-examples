@@ -1,0 +1,7 @@
+name: cacm-p
+persistent: {}
+tools:
+  - latex: 
+commands:
+  make: pdflatex -shell-escape main && bibtex main && pdflatex -shell-escape main && pdflatex -shell-escape main && pdflatex -shell-escape main
+  alt-make: latexmk -pdf -r latexmk-shell-escape.rc main
