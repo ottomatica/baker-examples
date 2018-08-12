@@ -14,7 +14,8 @@ persistent: {}
 tools:
   - latex: 
 commands:
-  make: pdflatex main && bibtex main && pdflatex main && pdflatex main && pdflatex main
+  make: pdflatex -shell-escape main && bibtex main && pdflatex -shell-escape main && pdflatex -shell-escape main && pdflatex -shell-escape main
+  alt-make: latexmk -pdf -r latexmk-shell-escape.rc main
 ```
 
 ### Try it out
@@ -23,8 +24,10 @@ Run `baker bake`. It may take a couple of minutes to download packages (nearly 3
 
 Run `baker run make`.
 
-Check out the generated main.pdf!
+Check out the generated main.pdf! You can also try `baker run alt-make` if you want to use latexmk to build paper, instead.
 
 ![generated pdf](imgs/latex-img.png)
+
+
 
 
