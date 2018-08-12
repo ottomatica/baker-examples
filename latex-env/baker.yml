@@ -1,4 +1,4 @@
-name: cacm-p
+name: latex-env
 persistent: {}
 tools:
   - latex: 
