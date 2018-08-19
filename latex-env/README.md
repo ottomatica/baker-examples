@@ -10,7 +10,7 @@ The [baker environment](baker.yml/) sets up a basic latex environment, which inc
 
 ``` yaml
 name: latex-paper
-persistent: {}
+container: {}
 tools:
   - latex: 
 commands:

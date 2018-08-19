@@ -1,5 +1,5 @@
 name: latex-env
-persistent: {}
+container: {}
 tools:
   - latex: 
 commands:
