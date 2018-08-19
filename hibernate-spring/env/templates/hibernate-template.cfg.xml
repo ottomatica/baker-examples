@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<!-- Copy hibernate-template.cfg.xml to a file name hibernate.cfg.xml in 
+	src/main/resources/. Update the hibernate.cfg.xml file with your local database 
+	information, including your password. The project's .gitignore is set up 
+	to ignore this file when your project is pushed to your assigned GitHub. 
+	NEVER push files containing passwords to version control! -->
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- SQL dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<!-- Drop and re-create the database schema on startup -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+
+		<!-- Connection properties -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost/coffeemaker?createDatabaseIfNotExist=true
+		</property>
+
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">{{mysql_password}}</property>
+
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="hibernate.connection.pool_size">10</property>
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- List of persistent classes -->
+		<mapping class="edu.ncsu.csc.coffee_maker.models.persistent.Recipe" />
+		<mapping class="edu.ncsu.csc.coffee_maker.models.persistent.Inventory" />
+
+	</session-factory>
+</hibernate-configuration>

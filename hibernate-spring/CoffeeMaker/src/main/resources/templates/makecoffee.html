@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Recipes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+	<h1>Coffee Recipes</h1>
+
+	<div layout:fragment="content">
+
+
+		<script th:inline="javascript">
+    	/*<![CDATA[*/
+    
+    
+		var app = angular.module('myApp', []);
+		app.controller('recipesCtrl', function($scope, $http, $q) {
+  			$http.get("/api/v1/recipes").then(function (response) {
+  				$scope.recipes = response.data;
+  			});
+  			
+			$scope.make = function(){
+				var amtPaid = $scope.amtPaid;
+				var name = $scope.name;
+				$scope.submissionFailure=false;
+				$scope.submissionSuccess=false;
+				
+				/* $http.get("/api/v1/recipes/" + name).then(function(response) {
+					console.log(response);
+					var recipe = response.data;
+					$scope.recipeS=response.data; */
+					
+					var deferred = $q.defer();
+			        $http.post("/api/v1/makecoffee/" + name, amtPaid)
+			            .then(
+			            function (response) {
+			                deferred.resolve(response.data);
+			                $scope.change = response.data.change;
+							$scope.submissionSuccess=true;
+			            },
+			            function(errResponse){
+			                console.error('Error while making recipe');
+			                deferred.reject(errResponse);
+			                
+			                console.log(errResponse);
+						    $scope.submissionFailure=true;
+						    $scope.error = "Error while making recipe";
+			            }
+			        );
+			        return deferred.promise;
+					
+					$http.post("/api/v1/makecoffee/" + name, amtPaid).then(function(response) {
+						$scope.change = response.data.change;
+						$scope.submissionSuccess=true;
+					}, function(response) {
+						console.log(response.data);
+					    $scope.submissionFailure=true;
+					    $scope.error = response.data;
+					});
+				    
+				/* }, function(rejection) {
+				    console.log(rejection);
+				    $scope.submissionFailure=true;
+				    $scope.error = "An unknown error";
+				}); */
+			}
+		});
+		
+		/*]]>*/
+	</script>
+
+		<div ng-app="myApp" ng-controller="recipesCtrl">
+			<ul>
+				<li ng-repeat="recipe in recipes"><label>{{recipe.name}}
+						<input type="radio" ng-model="$parent.name" name="name"
+						value="{{recipe.name}}" required="true" />
+				</label></li>
+			</ul>
+			<br /> <label for="amtPaid">Enter payment</label> <input type="text"
+				ng-model="amtPaid" name="amtPaid" required="true" /> <input
+				type="submit" ng-click="make()" value="Make Coffee" /> <br />
+
+			<div ng-show="submissionSuccess">Coffee was made. Your change
+				is {{change}}.</div>
+
+			<div ng-show="submissionFailure">An error occurred: {{error}}</div>
+
+			<br /> <a href="/index">Home</a>
+		</div>
+
+	</div>
+
+</body>
+</html>
