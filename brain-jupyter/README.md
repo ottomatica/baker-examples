@@ -22,5 +22,5 @@ commands:
 
 Run `baker bake`. Then start the jupyter server: `baker run serve`.
 
-Visit http://192.168.88.11:8888
+Visit http://192.168.88.11:8888/notebooks/brain.ipynb
 
