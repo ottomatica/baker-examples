@@ -1,0 +1,10 @@
+---
+name: brain-jupyter
+vm:
+  ip: 192.168.88.11
+lang:
+  - python2
+tools:
+- jupyter
+commands:
+  serve: jupyter notebook --no-browser --ip 0.0.0.0 --NotebookApp.token=''
