@@ -1,0 +1,6 @@
+name: python-container
+container: {}
+lang:
+  - python2
+commands:
+  demo: python demo.py

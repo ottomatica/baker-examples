@@ -9,3 +9,4 @@ A collection of simple development environments using Baker
 
 * [hibernate-spring](hibernate-spring/) - setups up a MySQL server and Java environment. Runs a web-based Java app.
 
+* [python-container](python-container/) - a simple python2 baker container for running python scripts.
