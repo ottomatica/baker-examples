@@ -1,0 +1,11 @@
+---
+name: mkdocs-example
+container: 
+  ports: 8005
+lang:
+  - python2
+commands:
+  build: mkdocs build
+  serve: mkdocs serve -a 0.0.0.0:8005
+# Need to link to your github repo in order for this to work: 
+# gh-deploy: mkdocs gh-deploy

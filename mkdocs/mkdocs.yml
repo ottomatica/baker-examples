@@ -1,0 +1,50 @@
+# Project information
+site_name: Baker Documentation
+site_description: 'The Baker Documentation'
+site_author: 'Ottomatica.io'
+# site_url: 'https://my-github-handle.github.io/my-project'
+
+# Repository
+repo_name: 'Ottomatica'
+repo_url: 'https://github.com/ottomatica'
+
+# Copyright
+copyright: 'Copyright &copy; 2018 Ottomatica LLC'
+
+theme: 'material'
+
+extra:
+  feature:
+    tabs: false
+  palette:
+    primary: 'blue grey'
+    accent: 'light blue'
+
+markdown_extensions:
+  - codehilite(linenums=true)
+  - toc(permalink=true)
+  - admonition
+  - pymdownx.arithmatex
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tilde
+
+nav:
+- Overview: 'index.md'
+- Write a Baker script: 
+  - Baker script: "bakerScript/basic.md"
+- Commands and Options:
+  - init:    "commands/init.md"
+  - bake:    "commands/bake.md"
+  - run:     "commands/run.md"
+  - halt:    "commands/halt.md"
+  - destroy: "commands/destroy.md"
