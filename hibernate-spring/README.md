@@ -12,7 +12,7 @@ In this project, we demonstrate several advanced bakelets:
 The [baker environment](baker.yml/) sets up MySQL, Java 8, maven, prompts for user input, and copies parameterized templates into project.
 
 ``` yaml
-name: onboard
+name: hibernate-spring
 vm:
   ip: 192.168.8.8
   ports: 8080
