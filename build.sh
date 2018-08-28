@@ -7,4 +7,6 @@ do
     echo "Baking $D";
     # provide input for hibernate-spring prompt
     (cd $D && echo 326 | baker bake)
+    echo "Destroying $D";
+    (cd $D && baker destroy)
 done
