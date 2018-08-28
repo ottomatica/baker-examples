@@ -1,0 +1,55 @@
+- job:
+    block-downstream: false
+    block-upstream: false
+    builders:
+    - shell: |-
+        mv $WORKSPACE/iTrust2/src/main/java/db.properties.template $WORKSPACE/iTrust2/src/main/java/db.properties
+        mv $WORKSPACE/iTrust2/src/main/java/email.properties.template $WORKSPACE/iTrust2/src/main/java/email.properties
+        sed -i "s/password/password $MYSQL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/db.properties
+        sed -i "s/username/username $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
+        sed -i "s/password/password $MAIL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/email.properties
+        cd $WORKSPACE/iTrust2
+        mvn process-test-classes
+        cd $WORKSPACE/iTrust2
+        mvn clean test verify checkstyle:checkstyle
+    concurrent: false
+    description: null
+    disabled: false
+    name: !!python/unicode 'itrust-build'
+    project-type: freestyle
+    publishers:
+    - post-tasks:
+      - escalate-status: false
+        matches:
+        - log-text: null
+          operator: AND
+        run-if-job-successful: true
+        script: |-
+            #cd /var/lib/jenkins/project_repo
+            #ansible-playbook -i deploy-inventory deploy-itrust.yml
+    scm:
+    - git:
+        branches:
+        - '*/master'
+        credentials-id: gitCredId
+        url: https://github.ncsu.edu/engr-csc326-staff/iTrust2-v3.git
+    triggers: []
+    wrappers:
+        - inject-passwords:
+            global: true
+            mask-password-params: true
+            job-passwords:
+                # - name: GIT_USER
+                #   password: {{git_user}}
+                # - name: GIT_PASSWORD
+                #   password: {{git_password}}
+                - name: MAIL_USER
+                  password: ENTER_HERE_MAIL_USER
+                - name: MAIL_PASSWORD
+                  password: ENTER_HERE_MAIL_PASSWORD
+                - name: MAIL_SMTP
+                  password: ENTER_HERE_MAIL_SMTP
+                - name: MYSQL_PASSWORD
+                  password: 326
+        - workspace-cleanup:
+            dirmatch: false

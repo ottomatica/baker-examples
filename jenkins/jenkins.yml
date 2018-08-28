@@ -1,0 +1,60 @@
+- hosts: all
+
+  roles:
+    - {role: geerlingguy.java, become: yes}
+    - role: geerlingguy.jenkins
+      jenkins_admin_username: admin
+      jenkins_admin_password: admin
+      jenkins_plugins:
+        - git
+        - ssh
+        - github
+        - ansicolor
+        - credentials
+      become: yes
+  
+  tasks: 
+     - name: install maven
+       apt: pkg="maven" state="present"
+       become: yes
+
+    # - name: Copy grovy scripts to $JENKINS_HOME
+    #   become: yes
+    #   command: cp -r /var/lib/jenkins/project_repo/jenkins_files/init.groovy.d/{{ item }} /var/lib/jenkins/init.groovy.d/
+    #   with_items:
+    #     - init.groovy
+    #     - makeCred.groovy
+    #     - remove.groovy
+
+
+
+    #  - uri:
+    #      url: 'http://127.0.0.1:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+    #      user: admin
+    #      password: admin
+    #      force_basic_auth: yes
+    #      return_content: yes
+    #    register: crumb
+
+     - uri:
+         method: POST
+         url: 'http://127.0.0.1:8080/credentials/store/system/domain/_/createCredentials'
+         user: admin
+         password: admin
+         force_basic_auth: yes
+#         headers:
+#           Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
+         body: |
+            json={
+              "": "0",
+              "credentials": {
+                "scope": "GLOBAL",
+                "id": "gitCredId",
+                "username": "{{git_user}}",
+                "password": "{{git_password}}",
+                "description": "Github Enterprise password",
+                "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
+              }
+            }
+       register: result  
+       failed_when: result.status not in [200,302]

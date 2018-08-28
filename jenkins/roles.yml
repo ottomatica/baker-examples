@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  tasks:
+    # file module breaks when localhost
+    - name: ensure roles dir exists
+      command: mkdir -p /mnt/roles/disk /etc/ansible/roles
+
+
+    - name: ensure symlink exists
+      file: 
+        src: /etc/ansible/roles
+        dest: /mnt/disk/roles 
+        state: link
+
+    - name: install roles
+      command: ansible-galaxy install --roles-path /mnt/disk/roles/ {{item}}
+      with_items:
+        - geerlingguy.java
+        - geerlingguy.jenkins
