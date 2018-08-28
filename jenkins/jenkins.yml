@@ -14,20 +14,37 @@
       become: yes
   
   tasks: 
-     - name: install maven
-       apt: pkg="maven" state="present"
-       become: yes
+    - name: Restart Jenkins again to ready plugins
+      become: yes
+      service:
+        name: jenkins
+        state: restarted
 
-    # - name: Copy grovy scripts to $JENKINS_HOME
-    #   become: yes
-    #   command: cp -r /var/lib/jenkins/project_repo/jenkins_files/init.groovy.d/{{ item }} /var/lib/jenkins/init.groovy.d/
-    #   with_items:
-    #     - init.groovy
-    #     - makeCred.groovy
-    #     - remove.groovy
+      # Make sure Jenkins is ready to run after last restart
+    - name: Ensure Jenkins is up and running
+      uri:
+        url: http://localhost:8080
+        status_code: 200
+        timeout: 5
+      register: jenkins_service_status
+      # Keep trying for 5 mins in 5 sec intervals
+      retries: 60
+      delay: 5
+      until: >
+        'status' in jenkins_service_status and
+        jenkins_service_status['status'] == 200
 
+    - name: install maven
+      apt: pkg="maven" state="present"
+      become: yes
 
+    - name: Install jenkins job builder
+      pip: name=jenkins-job-builder extra_args=--user executable=/usr/local/bin/pip
 
+    - name: Update jenkins job
+      command: .local/bin/jenkins-jobs --user admin --password admin update /tmp/job.yml
+
+    # If cross-site projection enabled:
     #  - uri:
     #      url: 'http://127.0.0.1:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
     #      user: admin
@@ -36,16 +53,16 @@
     #      return_content: yes
     #    register: crumb
 
-     - uri:
-         method: POST
-         url: 'http://127.0.0.1:8080/credentials/store/system/domain/_/createCredentials'
-         user: admin
-         password: admin
-         force_basic_auth: yes
-#         headers:
-#           Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
-         body: |
-            json={
+    - uri:
+        method: POST
+        url: 'http://127.0.0.1:8080/credentials/store/system/domain/_/createCredentials'
+        user: admin
+        password: admin
+        force_basic_auth: yes
+#        headers:
+#          Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
+        body: |
+          json={
               "": "0",
               "credentials": {
                 "scope": "GLOBAL",
@@ -56,5 +73,5 @@
                 "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
               }
             }
-       register: result  
-       failed_when: result.status not in [200,302]
+      register: result  
+      failed_when: result.status not in [200,302]

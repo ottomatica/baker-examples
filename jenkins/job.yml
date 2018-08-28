@@ -32,7 +32,7 @@
         branches:
         - '*/master'
         credentials-id: gitCredId
-        url: https://github.ncsu.edu/engr-csc326-staff/iTrust2-v3.git
+        url: {{git_url}}
     triggers: []
     wrappers:
         - inject-passwords:

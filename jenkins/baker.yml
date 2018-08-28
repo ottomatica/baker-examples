@@ -4,10 +4,28 @@ vm:
   memory: 2048
   ports: 8080:8326
   ip: 192.168.88.88
+# Update these values for your own repo:
+vars:
+  - git_user: cjparnin
+  - git_password: 
+      prompt: "Enter your git password"
+  - git_url: https://github.ncsu.edu/engr-csc326-staff/iTrust2-v3.git
+
+# For pip install of jenkins-job-builder
 lang:
   - python2
+
+# Fill in variables for jenkins job
+config:
+  - template: 
+      src: job.yml
+      dest: /tmp/job.yml
+
 custom:
   - roles:
       path: roles.yml
   - jenkins:
       path: jenkins.yml
+
+commands:
+  trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:8080/ build 'itrust-build'
