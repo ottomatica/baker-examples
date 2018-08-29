@@ -1,7 +1,7 @@
 ---
 name: jenkins-server
 vm:
-  memory: 2048
+  memory: 4096
   ports: 9000:8326
   ip: 192.168.88.88
 # Update these values for your own repo:
