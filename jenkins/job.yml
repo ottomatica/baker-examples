@@ -5,12 +5,12 @@
     - shell: |-
         mv $WORKSPACE/iTrust2/src/main/java/db.properties.template $WORKSPACE/iTrust2/src/main/java/db.properties
         mv $WORKSPACE/iTrust2/src/main/java/email.properties.template $WORKSPACE/iTrust2/src/main/java/email.properties
-        sed -i "s/password/password $MYSQL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/db.properties
-        sed -i "s/username/username $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
-        sed -i "s/password/password $MAIL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/email.properties
+        sed -i "s/password.*/password $MYSQL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/db.properties
+        sed -i "s/from.*/from $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
+        sed -i "s/username.*/username $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
+        sed -i "s/password.*/password $MAIL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/email.properties
         cd $WORKSPACE/iTrust2
-        mvn process-test-classes
-        cd $WORKSPACE/iTrust2
+        mvn -f pom-data.xml process-test-classes
         mvn clean test verify checkstyle:checkstyle
     concurrent: false
     description: null
@@ -44,12 +44,12 @@
                 # - name: GIT_PASSWORD
                 #   password: {{git_password}}
                 - name: MAIL_USER
-                  password: ENTER_HERE_MAIL_USER
+                  password: {{email_user}}
                 - name: MAIL_PASSWORD
-                  password: ENTER_HERE_MAIL_PASSWORD
+                  password: {{email_password}}
                 - name: MAIL_SMTP
                   password: ENTER_HERE_MAIL_SMTP
                 - name: MYSQL_PASSWORD
-                  password: 326
+                  password: {{mysql_password}}
         - workspace-cleanup:
             dirmatch: false

@@ -2,7 +2,7 @@
 name: jenkins-server
 vm:
   memory: 2048
-  ports: 8080:8326
+  ports: 9000:8326
   ip: 192.168.88.88
 # Update these values for your own repo:
 vars:
@@ -10,12 +10,26 @@ vars:
   - git_password: 
       prompt: "Enter your git password"
   - git_url: https://github.ncsu.edu/engr-csc326-staff/iTrust2-v3.git
+  - mysql_password: 326
+  - email_user: chrisparnin@gmail.com
+  - email_password:
+      prompt: "Enter email password"
 
-# For pip install of jenkins-job-builder
-lang:
-  - python2
+# MySQL Used for testing
+services:
+  - mysql:
+      version: 8
+      service_conf: mysql/mysql.cfg
+      client_conf: mysql/my.cnf
 
-# Fill in variables for jenkins job
+# Install headless chrome for selenium tests
+packages:
+  - apt:
+    - libnss3
+    - google-chrome-stable:
+        deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+# Fills in variables for jenkins job
 config:
   - template: 
       src: job.yml
@@ -28,4 +42,4 @@ custom:
       path: jenkins.yml
 
 commands:
-  trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:8080/ build 'itrust-build'
+  trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:9000/ build 'itrust-build'
