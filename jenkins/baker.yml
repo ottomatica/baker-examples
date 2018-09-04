@@ -31,7 +31,7 @@ packages:
 config:
   - template: 
       src: job.yml
-      dest: /tmp/job.yml
+      dest: ~/job.yml
 
 custom:
   - roles:
