@@ -9,7 +9,7 @@
       jenkins_plugins:
         - git
         - ssh
-        - github
+        #- github
         - ansicolor
         - credentials
         - EnvInject
