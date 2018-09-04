@@ -3,19 +3,14 @@
     block-upstream: false
     builders:
     - shell: |-
-        mv $WORKSPACE/iTrust2/src/main/java/db.properties.template $WORKSPACE/iTrust2/src/main/java/db.properties
-        mv $WORKSPACE/iTrust2/src/main/java/email.properties.template $WORKSPACE/iTrust2/src/main/java/email.properties
-        sed -i "s/password.*/password $MYSQL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/db.properties
-        sed -i "s/from.*/from $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
-        sed -i "s/username.*/username $MAIL_USER/g" $WORKSPACE/iTrust2/src/main/java/email.properties
-        sed -i "s/password.*/password $MAIL_PASSWORD/g" $WORKSPACE/iTrust2/src/main/java/email.properties
-        cd $WORKSPACE/iTrust2
-        mvn -f pom-data.xml process-test-classes
+        mv $WORKSPACE/iTrust2/src/main/java/hibernate-template.cfg.xml $WORKSPACE/iTrust2/src/main/java/hibernate.cfg.xml
+        sed -i "s/<property name="hibernate.connection.password">.*</property>/<property name="hibernate.connection.password">$MYSQL_PASSWORD</property>/g" $WORKSPACE/iTrust2/src/main/java/hibernate.cfg.xml
+        cd $WORKSPACE/CoffeeMaker
         mvn clean test verify checkstyle:checkstyle
     concurrent: false
     description: null
     disabled: false
-    name: !!python/unicode 'itrust-build'
+    name: !!python/unicode 'coffeemaker-build'
     project-type: freestyle
     publishers:
     - post-tasks:
@@ -43,12 +38,6 @@
                 #   password: {{git_user}}
                 # - name: GIT_PASSWORD
                 #   password: {{git_password}}
-                - name: MAIL_USER
-                  password: {{email_user}}
-                - name: MAIL_PASSWORD
-                  password: {{email_password}}
-                - name: MAIL_SMTP
-                  password: ENTER_HERE_MAIL_SMTP
                 - name: MYSQL_PASSWORD
                   password: {{mysql_password}}
         - workspace-cleanup:
