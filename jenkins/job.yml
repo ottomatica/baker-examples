@@ -26,7 +26,7 @@
     - git:
         branches:
         - '*/master'
-        credentials-id: gitCredId
+        # credentials-id: gitCredId
         url: {{git_url}}
     triggers: []
     wrappers:
@@ -34,10 +34,6 @@
             global: true
             mask-password-params: true
             job-passwords:
-                # - name: GIT_USER
-                #   password: {{git_user}}
-                # - name: GIT_PASSWORD
-                #   password: {{git_password}}
                 - name: MYSQL_PASSWORD
                   password: {{mysql_password}}
         - workspace-cleanup:

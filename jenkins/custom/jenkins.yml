@@ -65,25 +65,26 @@
     #      return_content: yes
     #    register: crumb
 
-    - uri:
-        method: POST
-        url: 'http://127.0.0.1:9000/credentials/store/system/domain/_/createCredentials'
-        user: admin
-        password: admin
-        force_basic_auth: yes
-#        headers:
-#          Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
-        body: |
-          json={
-              "": "0",
-              "credentials": {
-                "scope": "GLOBAL",
-                "id": "gitCredId",
-                "username": "{{git_user}}",
-                "password": "{{git_password}}",
-                "description": "Github Enterprise password",
-                "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
-              }
-            }
-      register: result  
-      failed_when: result.status not in [200,302]
+# If need to register credentials
+#     - uri:
+#         method: POST
+#         url: 'http://127.0.0.1:9000/credentials/store/system/domain/_/createCredentials'
+#         user: admin
+#         password: admin
+#         force_basic_auth: yes
+# #        headers:
+# #          Jenkins-Crumb: "{{ crumb.content.split(':')[1] }}"
+#         body: |
+#           json={
+#               "": "0",
+#               "credentials": {
+#                 "scope": "GLOBAL",
+#                 "id": "gitCredId",
+#                 "username": "{{git_user}}",
+#                 "password": "{{git_password}}",
+#                 "description": "Github Enterprise password",
+#                 "$class": "com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl"
+#               }
+#             }
+#       register: result  
+#       failed_when: result.status not in [200,302]
