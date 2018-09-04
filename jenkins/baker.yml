@@ -6,6 +6,7 @@ vm:
   ip: 192.168.6.10
 # Update these values for your own repo:
 vars:
+  # For private repos
   #- git_user: cjparnin
   #- git_password: 
   #    prompt: "Enter your git password"
@@ -39,4 +40,4 @@ custom:
       path: custom/jenkins.yml
 
 commands:
-  trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:9000/ build 'itrust-build'
+  trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:9000/ build 'coffeemaker-build'
