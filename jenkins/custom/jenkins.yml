@@ -13,6 +13,8 @@
         - ansicolor
         - credentials
         - EnvInject
+        - maven-plugin
+        - junit
       become: yes
   vars:
     jenkins_ini: |-

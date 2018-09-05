@@ -41,4 +41,4 @@ custom:
 
 commands:
   trigger: java -jar /opt/jenkins-cli.jar -s http://admin:admin@localhost:9000/ build 'coffeemaker-build'
-  update-job: .local/bin/jenkins-jobs --conf /etc/jenkins_jobs.ini --user admin --password admin update "{{BAKER_SHARE_DIR}}/job.yml"
+  update-job: ~/.local/bin/jenkins-jobs --conf /etc/jenkins_jobs.ini --user admin --password admin update job.yml
