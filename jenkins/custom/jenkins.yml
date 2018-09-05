@@ -52,8 +52,7 @@
       become: yes
 
     - name: Update jenkins job
-      command: .local/bin/jenkins-jobs --conf /etc/jenkins_jobs.ini --user admin --password admin update ~/job.yml
-
+      command: .local/bin/jenkins-jobs --conf /etc/jenkins_jobs.ini --user admin --password admin update {{BAKER_SHARE_DIR}}/job.yml
 
 
     # If cross-site projection enabled:
