@@ -8,7 +8,8 @@
     - maven-target:
         maven-version: mvn
         pom: CoffeeMaker/pom.xml
-        goals: clean test verify checkstyle:checkstyle    concurrent: false
+        goals: clean test verify checkstyle:checkstyle
+    concurrent: false
     description: null
     disabled: false
     name: !!python/unicode 'coffeemaker-build'
@@ -18,7 +19,7 @@
          results: "**/target/surefire-reports/*.xml"
          measurement-plots: true
          flaky-test-reports: true
-    - cucumber-testresult:
+    - cucumber-reports:
          results: "**/*cucumberTest.xml"
          ignore-bad-steps: true
     - post-tasks:

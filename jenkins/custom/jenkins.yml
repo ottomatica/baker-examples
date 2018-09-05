@@ -15,6 +15,7 @@
         - EnvInject
         - maven-plugin
         - junit
+        - cucumber-reports
       become: yes
   vars:
     jenkins_ini: |-
