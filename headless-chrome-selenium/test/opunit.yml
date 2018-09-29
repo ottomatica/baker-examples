@@ -1,0 +1,13 @@
+- hostgroup:
+    name: app
+    checks:
+    #   - availability:
+    #       port: 4000
+    #       status: 200
+    #       url: engr-csc326-staff/326-course-page/
+    #       setup: 
+    #         cmd: baker run serve
+    #         wait_for: Server running...
+      - version:          
+         cmd: google-chrome --version
+         range: ^68.x.x
