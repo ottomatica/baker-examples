@@ -1,0 +1,16 @@
+- hostgroup:
+    name: app
+    checks:
+      - availability:
+          port: 8080
+          status: 200
+          url: /
+          setup: 
+            cmd: baker run serve
+            wait_for: Started Application
+      - version:          
+         cmd: mysql --version
+         range: ^8.x.x
+      - version:          
+         cmd: java -version
+         range: ^1.8.x
