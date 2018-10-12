@@ -14,3 +14,7 @@
       - version:          
          cmd: java -version
          range: ^1.8.x
+      - reachable:
+          - /hibernate-spring/CoffeeMaker/src/main/resources/hibernate.cfg.xml
+          - https://www.google.com
+          - google.com
