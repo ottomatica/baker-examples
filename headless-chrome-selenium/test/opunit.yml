@@ -1,4 +1,4 @@
-- hostgroup:
+- group:
     name: app
     checks:
     #   - availability:
