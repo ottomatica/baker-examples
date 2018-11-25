@@ -1,0 +1,8 @@
+- group:
+    name: app
+    checks:
+      - reachable:
+          - /home/vagrant/secret.json
+      - contains:
+          file: /home/vagrant/secret.json
+          string: "secret"
