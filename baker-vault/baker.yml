@@ -1,0 +1,7 @@
+name: baker-vault
+vm: 
+  ip: 192.168.99.99
+config:
+  - vault:
+    - file: secret.json
+      dest: ~/secret.json
