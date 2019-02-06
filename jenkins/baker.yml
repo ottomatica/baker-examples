@@ -16,7 +16,7 @@ vars:
 # MySQL Used for testing
 services:
   - mysql:
-      version: 8
+      version: 5.7
       service_conf: mysql/mysql.cfg
       client_conf: mysql/my.cnf
 
